@@ -1,5 +1,5 @@
 import {pool} from "@/server_sevices/databasepool";
-import {RowDataPacket, escape} from "mysql2";
+import {escape} from "mysql2";
 
 async function getAllReactivos() {
     const query = "Select r.id, r.nombre, m.nombre as marca, c.descripcion as contenedor, r.numcas, r.cantidad, r.unidad " +

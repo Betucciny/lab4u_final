@@ -1,4 +1,4 @@
-import {pool} from "databasepool";
+import {pool} from "./databasepool";
 import {hashPassword} from "./encryption";
 import {escape} from "mysql2";
 

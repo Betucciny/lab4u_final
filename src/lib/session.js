@@ -1,4 +1,4 @@
-import {withIronSession, Session} from "next-iron-session";
+import {withIronSession} from "next-iron-session";
 
 const sessionOptions = {
     password: String(process.env.SECRET_COOKIE_PASSWORD),

@@ -4,27 +4,28 @@ import {login} from "@/client_services/posts";
 
 
 export default function Home() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    let user= {isLoggedIn: false, nombre: ''}
+    const [user_data, setUser_data] = useState({username: '', password: ''});
+    const [user, setUser] = useState({isLoggedIn: false, nombre: ''});
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(user)
         try {
-            const objetjoResponse = await login(username, password)
-            if (objetjoResponse.status === 200) {
+            const objectResponse = await login(user_data.username, user_data.password)
+            if (objectResponse.status === 200) {
                 alert('Login success')
-                user = {isLoggedIn: true, nombre: objetjoResponse.data.data.nombre};
+                setUser({isLoggedIn: true, nombre: objectResponse.data.data.nombre});
             }
         } catch (error) {
             console.log(error)
             alert(error.response.data.data);
         }
-    };
+    }
+
     const usernameHandler = (e) => {
-        setUsername(e.target.value);
+        setUser_data({...user_data, username: e.target.value})
     }
     const passwordHandler = (e) => {
-        setPassword(e.target.value);
+        setUser_data({...user_data, password: e.target.value})
     }
 
     return (
