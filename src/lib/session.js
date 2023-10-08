@@ -17,8 +17,10 @@ export function withSession(handler) {
 export function withSessionPage() {
     return withSession(async function ({req, res}) {
         if (req.session.get("isLoggedIn") === false || req.session.get("isLoggedIn") === undefined) {
-            res.writeHead(302, {Location: "/login"});
-            res.end();
+            if (req.url !== "/login") {
+                res.writeHead(302, {Location: "/login"});
+                res.end();
+            }
         }
         return {
             props: {

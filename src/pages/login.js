@@ -1,24 +1,29 @@
 import {MainLayout} from '@/components/layout'
 import {useState} from "react";
-import {withSession, withSessionPage} from "@/lib/session";
+import {withSessionPage} from "@/lib/session";
 import {login} from "@/client_services/posts";
 
 
-export default function LoginPage({props}) {
-    const [user_data, setUser_data] = useState({username: '', password: ''});
-    const [user, setUser] = useState({isLoggedIn: false, nombre: ''});
-
+export default function LoginPage(props) {
     console.log(props)
-
+    const [user_session, setUser_session] = useState({
+        isLoggedIn: props.isLoggedIn,
+        nombre: props.user,
+        roles: props.role
+    });
+    const [user_data, setUser_data] = useState({username: '', password: ''});
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(user)
         try {
             const objectResponse = await login(user_data.username, user_data.password)
             if (objectResponse.status === 200) {
+                setUser_session({
+                    isLoggedIn: true,
+                    nombre: objectResponse.data.data.nombre,
+                    roles: objectResponse.data.data.roles
+                })
                 alert('Login success')
-                setUser({isLoggedIn: true, nombre: objectResponse.data.data.nombre});
             }
         } catch (error) {
             console.log(error)
@@ -37,7 +42,7 @@ export default function LoginPage({props}) {
         <MainLayout isLoggedIn={user_session.isLoggedIn} name={user_session.nombre} role={user_session.roles}>
             <h1>Login</h1>
             {
-                user.isLoggedIn ? <h1>{user.nombre}</h1> : <h1>Not logged in</h1>
+                user_session.isLoggedIn ? <h1>{user_session.nombre}</h1> : <h1>Not logged in</h1>
             }
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder="username" onChange={usernameHandler}/>
@@ -48,13 +53,4 @@ export default function LoginPage({props}) {
         </MainLayout>
     )
 }
-export const getServerSideProps = withSession(async function ({req, res}) {
-
-    return {
-        props: {
-            isLoggedIn: req.session.get("isLoggedIn") || false,
-            user: req.session.get("user") || {},
-            role: req.session.get("role") || [],
-        }
-    }
-});
+export const getServerSideProps = withSessionPage()
