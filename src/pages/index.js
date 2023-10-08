@@ -10,7 +10,7 @@ export default function Home(props) {
         roles: props.role
     });
     return (
-        <MainLayout>
+        <MainLayout isLoggedIn={user_session.isLoggedIn} name={user_session.nombre} role={user_session.roles}>
             <h1>Home</h1>
             <p>{"Roles: " + user_session.roles}</p>
             <p>{"Nombre: " + user_session.nombre}</p>
