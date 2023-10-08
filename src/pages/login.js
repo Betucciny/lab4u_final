@@ -40,17 +40,43 @@ export default function LoginPage(props) {
 
     return (
         <MainLayout isLoggedIn={user_session.isLoggedIn} name={user_session.nombre} role={user_session.roles}>
-            <h1>Login</h1>
-            {
-                user_session.isLoggedIn ? <h1>{user_session.nombre}</h1> : <h1>Not logged in</h1>
-            }
-            <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="username" onChange={usernameHandler}/>
-                <input type="password" placeholder="password" onChange={passwordHandler}/>
-                <button type="submit">Login</button>
-            </form>
+            <div className="flex justify-center items-center">
+                <div className="bg-white p-8 rounded-lg shadow-md w-96">
+                    <h1 className="text-4xl font-semibold text-gray-800">Login</h1>
+                    {user_session.isLoggedIn ? (
+                        <h2 className="text-lg font-semibold mb-4 text-blue-500">Bienvenido {user_session.nombre}</h2>
+                    ) : (
+                        <>
+                            <h2 className="text-lg font-semibold mb-4 text-red-500">Not logged in</h2>
+                            <form onSubmit={handleSubmit} className="space-y-4">
+                                <input
+                                    type="text"
+                                    placeholder="Username"
+                                    onChange={usernameHandler}
+                                    className="block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500 focus:outline-none"
+                                    required
+                                />
+                                <input
+                                    type="password"
+                                    placeholder="Password"
+                                    onChange={passwordHandler}
+                                    className="block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500 focus:outline-none"
+                                    required
+                                />
+                                <button
+                                    type="submit"
+                                    className="block w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md"
+                                >
+                                    Login
+                                </button>
+                            </form>
+                        </>
+                    )}
+                </div>
+            </div>
 
         </MainLayout>
     )
 }
+
 export const getServerSideProps = withSessionPage()

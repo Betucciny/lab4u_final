@@ -26,6 +26,13 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
 .color1 {color: #1a1812;}
 .color2 {color: #3f2e27;}
 .color3 {color: #6c5b44;}

@@ -33,7 +33,6 @@ export default function Home(props) {
     const kitsHeader = ["ID", "Nombre", "Marca", "Tipo", "Descripcion", "Materiales"];
 
 
-
     const [page, setPage] = useState(1);
     const [data, setData] = useState([]);
     const [pages, setPages] = useState(1);
@@ -62,13 +61,11 @@ export default function Home(props) {
         fetchData();
     }, [active])
 
-    console.log(`Pages ${pages}`)
 
     return (
         <MainLayout isLoggedIn={user_session.isLoggedIn} name={user_session.nombre} role={user_session.roles}>
             <h1> Inventario </h1>
-            <p> {active}</p>
-            <div>
+            <div className="p-3 flex items-center">
                 <Select
                     label='Categoria'
                     className="max-w-xs"
