@@ -8,6 +8,8 @@ import {
     NavbarMenu,
     NavbarMenuItem,
     NavbarMenuToggle,
+    Divider,
+    Tooltip,
 } from "@nextui-org/react";
 import Link from "next/link";
 
@@ -15,12 +17,14 @@ function Header({name, isLoggedIn, role}) {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
     const menuItems = isLoggedIn ? [
+        ["Inicio", "/inicio"],
         ["Inventario", "/inventario"],
         ["Crear Vale", "/crear-vale"],
         ["Historial de Vales", "/historial-vales"],
         ["Configuración", "/configuracion"],
         ["Log out", "/logout"],
     ] : [
+        ["Inicio", "/inicio"],
         ["Log in", "/login"],
     ];
 
@@ -55,17 +59,6 @@ function Header({name, isLoggedIn, role}) {
                 ))}
             </NavbarContent>
 
-            <NavbarContent justify="end">
-                <NavbarItem className="hidden lg:flex">
-                    <Link href="#">Login</Link>
-                </NavbarItem>
-                <NavbarItem>
-                    <Button as={Link} color="warning" href="#" variant="flat">
-                        Sign Up
-                    </Button>
-                </NavbarItem>
-            </NavbarContent>
-
             <NavbarMenu >
                 {menuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>
@@ -87,13 +80,20 @@ function Header({name, isLoggedIn, role}) {
 }
 
 function Footer() {
-    return (
-        <div className="footer--container">
-            <p>
-                Footer
-            </p>
+    return(
+    <div className="md:hidden">
+        <div className="space-y-1">
+            <h4 className="text-medium font-medium">LAB4U</h4>
+            <p className="text-small text-default-400">Sistema de inventario para laboratorio de Química UPIIT.</p>
         </div>
-    )
+        <Divider className="my-4" />
+        <div className="flex h-5 items-center space-x-4 text-small">
+            <Link href="#">Acerca de</Link>
+            <Divider orientation="vertical" />
+            <Link href="#">Contacto</Link>
+        </div>
+    </div>
+    );
 }
 
 

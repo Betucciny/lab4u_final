@@ -25,3 +25,9 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.color1 {color: #1a1812;}
+.color2 {color: #3f2e27;}
+.color3 {color: #6c5b44;}
+.color4 {color: #978b70;}
+.color5 {color: #b5af84;}
