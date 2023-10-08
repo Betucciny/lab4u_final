@@ -17,14 +17,14 @@ function Header({name, isLoggedIn, role}) {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
     const menuItems = isLoggedIn ? [
-        ["Inicio", "/inicio"],
+        ["Inicio", "/"],
         ["Inventario", "/inventario"],
         ["Crear Vale", "/crear-vale"],
         ["Historial de Vales", "/historial-vales"],
         ["Configuración", "/configuracion"],
         ["Log out", "/logout"],
     ] : [
-        ["Inicio", "/inicio"],
+        ["Inicio", "#"],
         ["Log in", "/login"],
     ];
 
@@ -81,19 +81,30 @@ function Header({name, isLoggedIn, role}) {
 
 function Footer() {
     return(
-    <div className="max-w-md">
-        <div className="space-y-1">
-            <h4 className="text-medium font-medium">LAB4U</h4>
-            <p className="text-small text-default-400">Sistema de inventario para laboratorio de Química UPIIT.</p>
-        </div>
-        <Divider className="my-4" />
-        <div className="flex h-5 items-center space-x-4 text-small">
-            <Link href="#">Acerca de</Link>
-            <Divider orientation="vertical" />
-            <Link href="#">Contacto</Link>
-        </div>
-    </div>
-    );
+        <footer className="bg-white dark:bg-gray-900">
+            <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center"> LAB4U Sistema de inventario para laboratorio de Química UPIIT.
+        </span>
+            <div className="mx-auto w-full max-w-screen-xl">
+                <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
+                    <Divider className="my-4" />
+                    <div>
+                        <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                            <li className="mb-4">
+                                <a href="#" className=" hover:underline">About</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                            <li className="mb-4">
+                                <a href="#" className="hover:underline">Discord Server</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    )
 }
 
 
@@ -101,7 +112,7 @@ function MainLayout({children, name, isLoggedIn, role}) {
     return (
         <>
             <Header name={name} isLoggedIn={isLoggedIn} role={role} />
-            <main>
+            <main className="p-9">
                 {children}
             </main>
             <Footer/>
