@@ -6,6 +6,10 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+    --navbar-bg-color: #3f2e27; /* Color de fondo del Navbar */
+    --navbar-text-color: #ffff; /* Color del texto del Navbar */
+    --footer-bg-color: #3f2e27; /* Color de fondo del Footer */
+    --footer-text-color: #ffff; /* Color del texto del Footer */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -33,8 +37,10 @@ h1 {
     margin-bottom: 1rem;
 }
 
+/* Paleta de colores */
 .color1 {color: #1a1812;}
 .color2 {color: #3f2e27;}
 .color3 {color: #6c5b44;}
 .color4 {color: #978b70;}
 .color5 {color: #b5af84;}
+.color6 {color: #ffff;}

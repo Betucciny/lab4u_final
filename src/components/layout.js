@@ -33,6 +33,7 @@ function Header({name, isLoggedIn, role}) {
             isBordered
             isMenuOpen={isMenuOpen}
             onMenuOpenChange={setIsMenuOpen}
+            className="bg-[var(--navbar-bg-color)] text-[var(--navbar-text-color)]"
         >
             <NavbarContent className="md:hidden" justify="start">
                 <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
@@ -59,14 +60,11 @@ function Header({name, isLoggedIn, role}) {
                 ))}
             </NavbarContent>
 
-            <NavbarMenu >
+            <NavbarMenu className="bg-[#3f2e27] bg-opacity-90">
                 {menuItems.map((item, index) => (
-                    <NavbarMenuItem key={`${item[0]}}-${index}`}>
+                    <NavbarMenuItem key={`${item[0]}-${index}`}>
                         <Link
-                            className="w-full"
-                            color={
-                                index === 2 ? "warning" : index === menuItems.length - 1 ? "danger" : "foreground"
-                            }
+                            className={`w-full text-[var(--navbar-text-color)]`}
                             href="#"
                             size="lg"
                         >
@@ -75,13 +73,17 @@ function Header({name, isLoggedIn, role}) {
                     </NavbarMenuItem>
                 ))}
             </NavbarMenu>
+
         </Navbar>
     );
 }
 
 function Footer() {
     return(
-        <footer className="bg-gray-800 text-white py-9">
+        <footer className="bg-gray-800 text-white py-9" style={{
+            backgroundColor: 'var(--footer-bg-color)',
+            color: 'var(--footer-text-color)',
+        }}>
             <div className="container mx-auto md:flex md:justify-between md:items-center p-9">
                 <div className="md:text-center mb-4 md:mb-0">
                     <a href="#" className="text-blue-300 hover:text-blue-400 text-sm font-semibold">Acerca de</a>
