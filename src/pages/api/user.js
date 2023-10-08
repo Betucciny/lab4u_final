@@ -7,10 +7,14 @@ export default withSession(async (req, res) => {
         return;
     }
     const user = req.session.get("user");
-    if (user) {
+    const isLoggedIn = req.session.get("isLoggedIn");
+    const role = req.session.get("role");
+    const roleArray = role.toString().split(", ");
+    if (isLoggedIn) {
         res.status(200).json({
-            isLoggedIn: true,
-            ...user,
+            isLoggedIn: isLoggedIn,
+            user: user,
+            role: roleArray
         })
     }else {
         res.status(200).json({

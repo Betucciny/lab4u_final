@@ -1,11 +1,16 @@
 import {MainLayout} from '@/components/layout'
 import {useState} from "react";
-import {login} from "@/client_services/posts";
+import {getUserInfo, login} from "@/client_services/posts";
+import withSession from "@/lib/session";
 
 
-export default function Home() {
+export default withSession(async (req, res) => {
     const [user_data, setUser_data] = useState({username: '', password: ''});
     const [user, setUser] = useState({isLoggedIn: false, nombre: ''});
+
+    console.log(req.session)
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(user)
@@ -53,4 +58,5 @@ export default function Home() {
             ;
         </MainLayout>
     )
-}
+})
+

@@ -11,8 +11,9 @@ export default withSession(async (req, res) => {
   const {username, password} = req.body;
   try {
     const userCredentials = await getUser(username);
+    console.log(userCredentials)
     if (await comparePassword(password, userCredentials.clave) === true) {
-      await saveSession(userCredentials.nombre, ["admin, estudiante"], req);
+      await saveSession(userCredentials.nombre, userCredentials.roles, req);
       res.status(200).json({status: "success", data: userCredentials});
     } else {
       res.status(403).json({status: "error", data: ERROR_CREDENTIALS});

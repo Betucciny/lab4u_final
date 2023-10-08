@@ -2,12 +2,14 @@ import {MainLayout} from "@/components/layout";
 import {useState} from "react";
 
 export default function Home() {
-    const [user_session, setUser_session] = useState({isLoggedIn: false, nombre: ''});
-
-
+    const [active, setActive] = useState(0);
+    const categories = [
+        "Materiales",
+        "Reacitivos",
+    ]
     return (
         <MainLayout>
-            <h1>Home</h1>
+
         </MainLayout>
     )
 }

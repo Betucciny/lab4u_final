@@ -5,4 +5,8 @@ async function login(username, password) {
     return axios.post("/api/auth", {username, password})
 }
 
-export {login};
+async function getUserInfo() {
+    return axios.get("/api/user")
+}
+
+export {login, getUserInfo};

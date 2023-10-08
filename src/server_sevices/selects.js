@@ -37,6 +37,13 @@ async function getAllKits() {
     });
 }
 
+async function getRoles(id) {
+    const query = "Select r.tipo from rol r left join usuario_rol ur ON r.id = ur.idrol where ur.idusuario = " + escape(id);
+    const [roles] = await pool.query(query);
+    console.log(roles)
+    return roles.map((rol) => rol.tipo);
+}
+
 
 async function getUser(username) {
     const query = "Select id, nombre, clave from usuario where nombre = " + escape(username);
@@ -44,6 +51,7 @@ async function getUser(username) {
     if (user.length === 0) {
         throw new Error("No user found");
     }
+    user[0].roles = await getRoles(user[0].id);
     return user[0];
 }
 

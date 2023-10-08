@@ -1,6 +1,9 @@
 import {withIronSession} from "next-iron-session";
 
 const sessionOptions = {
+    user: "",
+    isLoggedIn: false,
+    role: [],
     password: String(process.env.SECRET_COOKIE_PASSWORD),
     cookieName: "lab4u_auth_session",
     cookieOptions: {
