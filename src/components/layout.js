@@ -11,13 +11,17 @@ import {
 } from "@nextui-org/react";
 import Link from "next/link";
 
-function Header() {
+function Header({name, isLoggedIn, role}) {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-    const menuItems = [
+    const menuItems = isLoggedIn ? [
         ["Inventario", "/inventario"],
-        ["Settings", "/settings"],
+        ["Crear Vale", "/crear-vale"],
+        ["Historial de Vales", "/historial-vales"],
+        ["Configuración", "/configuracion"],
         ["Log out", "/logout"],
+    ] : [
+        ["Log in", "/login"],
     ];
 
     return (
@@ -33,14 +37,14 @@ function Header() {
             <NavbarContent className="md:hidden pr-3" justify="center">
                 <NavbarBrand>
 
-                    <p className="font-bold text-inherit">ACME</p>
+                    <p className="font-bold text-inherit">LAB4U</p>
                 </NavbarBrand>
             </NavbarContent>
 
             <NavbarContent className="hidden md:flex gap-4" justify="center">
                 <NavbarBrand>
 
-                    <p className="font-bold text-inherit">ACME</p>
+                    <p className="font-bold text-inherit">LAB4U</p>
                 </NavbarBrand>
                 {menuItems.map((item, index) => (
                     <NavbarItem key={`${item[0]}-${index}`}>
@@ -93,10 +97,10 @@ function Footer() {
 }
 
 
-function MainLayout({children}) {
+function MainLayout({children, name, isLoggedIn, role}) {
     return (
         <>
-            <Header/>
+            <Header name={name} isLoggedIn={isLoggedIn} role={role} />
             <main>
                 {children}
             </main>
