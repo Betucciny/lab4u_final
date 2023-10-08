@@ -81,7 +81,7 @@ function Header({name, isLoggedIn, role}) {
 
 function Footer() {
     return(
-    <div className="md:hidden">
+    <div className="max-w-md">
         <div className="space-y-1">
             <h4 className="text-medium font-medium">LAB4U</h4>
             <p className="text-small text-default-400">Sistema de inventario para laboratorio de Química UPIIT.</p>
