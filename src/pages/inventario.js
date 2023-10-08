@@ -8,7 +8,7 @@ export default function Home() {
         "Reacitivos",
     ]
     return (
-        <MainLayout>
+        <MainLayout isLoggedIn={user_session.isLoggedIn} name={user_session.nombre} role={user_session.roles}>
 
         </MainLayout>
     )

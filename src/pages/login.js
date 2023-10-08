@@ -34,7 +34,7 @@ export default function LoginPage({props}) {
     }
 
     return (
-        <MainLayout>
+        <MainLayout isLoggedIn={user_session.isLoggedIn} name={user_session.nombre} role={user_session.roles}>
             <h1>Login</h1>
             {
                 user.isLoggedIn ? <h1>{user.nombre}</h1> : <h1>Not logged in</h1>
