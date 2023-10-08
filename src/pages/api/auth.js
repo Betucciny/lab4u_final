@@ -1,4 +1,4 @@
-import withSession from "@/lib/session";
+import {withSession} from "@/lib/session";
 import {getUser} from "@/server_sevices/selects";
 import {comparePassword} from "@/server_sevices/encryption";
 

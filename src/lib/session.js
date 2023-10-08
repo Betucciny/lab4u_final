@@ -1,9 +1,6 @@
 import {withIronSession} from "next-iron-session";
 
 const sessionOptions = {
-    user: "",
-    isLoggedIn: false,
-    role: [],
     password: String(process.env.SECRET_COOKIE_PASSWORD),
     cookieName: "lab4u_auth_session",
     cookieOptions: {
@@ -13,7 +10,22 @@ const sessionOptions = {
 }
 
 
-export default function withSession(handler) {
+export function withSession(handler) {
     return withIronSession(handler, sessionOptions);
 }
 
+export function withSessionPage() {
+    return withSession(async function ({req, res}) {
+        if (req.session.get("isLoggedIn") === false || req.session.get("isLoggedIn") === undefined) {
+            res.writeHead(302, {Location: "/login"});
+            res.end();
+        }
+        return {
+            props: {
+                isLoggedIn: req.session.get("isLoggedIn") || false,
+                user: req.session.get("user") || {},
+                role: req.session.get("role") || [],
+            }
+        }
+    });
+}

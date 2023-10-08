@@ -1,14 +1,14 @@
 import {MainLayout} from '@/components/layout'
 import {useState} from "react";
-import {getUserInfo, login} from "@/client_services/posts";
-import withSession from "@/lib/session";
+import {withSession, withSessionPage} from "@/lib/session";
+import {login} from "@/client_services/posts";
 
 
-export default withSession(async (req, res) => {
+export default function LoginPage({props}) {
     const [user_data, setUser_data] = useState({username: '', password: ''});
     const [user, setUser] = useState({isLoggedIn: false, nombre: ''});
 
-    console.log(req.session)
+    console.log(props)
 
 
     const handleSubmit = async (e) => {
@@ -35,28 +35,26 @@ export default withSession(async (req, res) => {
 
     return (
         <MainLayout>
-            <div>
-                {
-                    <>{!user.isLoggedIn && <form onSubmit={handleSubmit}>
-                        <div className="imgcontainer">
-                            {/*<img src="img_avatar2.png" alt="Avatar" className="avatar"/>*/}
-                        </div>
+            <h1>Login</h1>
+            {
+                user.isLoggedIn ? <h1>{user.nombre}</h1> : <h1>Not logged in</h1>
+            }
+            <form onSubmit={handleSubmit}>
+                <input type="text" placeholder="username" onChange={usernameHandler}/>
+                <input type="password" placeholder="password" onChange={passwordHandler}/>
+                <button type="submit">Login</button>
+            </form>
 
-                        <div className="container">
-                            <label htmlFor="uname"><b>Username</b></label>
-                            <input type="text" placeholder="Enter Username" name="uname" required
-                                   onChange={usernameHandler}/>
-
-                            <label htmlFor="psw"><b>Password</b></label>
-                            <input type="password" placeholder="Enter Password" name="psw" required
-                                   onChange={passwordHandler}/>
-
-                            <button type="submit">Login</button>
-                        </div>
-                    </form>}</>}
-            </div>
-            ;
         </MainLayout>
     )
-})
+}
+export const getServerSideProps = withSession(async function ({req, res}) {
 
+    return {
+        props: {
+            isLoggedIn: req.session.get("isLoggedIn") || false,
+            user: req.session.get("user") || {},
+            role: req.session.get("role") || [],
+        }
+    }
+});
