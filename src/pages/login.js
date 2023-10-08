@@ -2,10 +2,10 @@ import {MainLayout} from '@/components/layout'
 import {useState} from "react";
 import {withSessionPage} from "@/lib/session";
 import {login} from "@/client_services/posts";
+import {Button, Input} from "@nextui-org/react";
 
 
 export default function LoginPage(props) {
-    console.log(props)
     const [user_session, setUser_session] = useState({
         isLoggedIn: props.isLoggedIn,
         nombre: props.user,
@@ -32,10 +32,10 @@ export default function LoginPage(props) {
     }
 
     const usernameHandler = (e) => {
-        setUser_data({...user_data, username: e.target.value})
+        setUser_data({...user_data, username: e})
     }
     const passwordHandler = (e) => {
-        setUser_data({...user_data, password: e.target.value})
+        setUser_data({...user_data, password: e})
     }
 
     return (
@@ -49,26 +49,26 @@ export default function LoginPage(props) {
                         <>
                             <h2 className="text-lg font-semibold mb-4 text-red-500">Not logged in</h2>
                             <form onSubmit={handleSubmit} className="space-y-4">
-                                <input
+                                <Input
                                     type="text"
                                     placeholder="Username"
-                                    onChange={usernameHandler}
+                                    onValueChange={usernameHandler}
                                     className="block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500 focus:outline-none"
                                     required
                                 />
-                                <input
+                                <Input
                                     type="password"
                                     placeholder="Password"
-                                    onChange={passwordHandler}
+                                    onValueChange={passwordHandler}
                                     className="block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500 focus:outline-none"
                                     required
                                 />
-                                <button
+                                <Button
                                     type="submit"
                                     className="block w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md"
                                 >
                                     Login
-                                </button>
+                                </Button>
                             </form>
                         </>
                     )}

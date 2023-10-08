@@ -65,7 +65,7 @@ function Header({name, isLoggedIn, role}) {
                     <NavbarMenuItem key={`${item[0]}-${index}`}>
                         <Link
                             className={`w-full text-[var(--navbar-text-color)]`}
-                            href="#"
+                            href={item[1]}
                             size="lg"
                         >
                             {item[0]}
