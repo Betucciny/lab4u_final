@@ -61,7 +61,7 @@ function Header({name, isLoggedIn, role}) {
 
             <NavbarMenu >
                 {menuItems.map((item, index) => (
-                    <NavbarMenuItem key={`${item}-${index}`}>
+                    <NavbarMenuItem key={`${item[0]}}-${index}`}>
                         <Link
                             className="w-full"
                             color={
@@ -70,7 +70,7 @@ function Header({name, isLoggedIn, role}) {
                             href="#"
                             size="lg"
                         >
-                            {item}
+                            {item[0]}
                         </Link>
                     </NavbarMenuItem>
                 ))}
@@ -81,26 +81,16 @@ function Header({name, isLoggedIn, role}) {
 
 function Footer() {
     return(
-        <footer className="bg-white dark:bg-gray-900">
-            <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center"> LAB4U Sistema de inventario para laboratorio de Química UPIIT.
-        </span>
-            <div className="mx-auto w-full max-w-screen-xl">
-                <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
-                    <Divider className="my-4" />
-                    <div>
-                        <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                            <li className="mb-4">
-                                <a href="#" className=" hover:underline">About</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                            <li className="mb-4">
-                                <a href="#" className="hover:underline">Discord Server</a>
-                            </li>
-                        </ul>
-                    </div>
+        <footer className="bg-gray-800 text-white py-9">
+            <div className="container mx-auto md:flex md:justify-between md:items-center p-9">
+                <div className="md:text-center mb-4 md:mb-0">
+                    <a href="#" className="text-blue-300 hover:text-blue-400 text-sm font-semibold">Acerca de</a>
+                </div>
+                <div className="md:text-center">
+                    <p className="text-sm font-light">LAB4U: Sistema de inventario para laboratorio de Química UPIIT</p>
+                </div>
+                <div className="md:text-center">
+                    <a href="#" className="text-blue-300 hover:text-blue-400 text-sm font-semibold">Contáctanos</a>
                 </div>
             </div>
         </footer>
