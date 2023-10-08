@@ -2,8 +2,9 @@ import {pool} from "@/server_sevices/databasepool";
 import {escape} from "mysql2";
 
 async function getAllReactivos() {
-    const query = "Select r.id, r.nombre, m.nombre as marca, c.descripcion as contenedor, r.numcas, r.cantidad, r.unidad " +
-        "from reactivo r left join marca m ON r.idmarca = m.id left join contenedor c ON r.idcontenedor = c.id";
+    const query = "Select r.id, r.nombre, m.nombre as marca, c.descripcion as contenedor, r.numcas, " +
+        "p.cantidad, p.unidad from reactivo r left join marca m ON r.idmarca = m.id left join contenedor c ON " +
+        "r.idcontenedor = c.id left join presentacion p ON r.idpresentacion = p.id";
     const [reactivos] = await pool.query(query)
     return reactivos;
 }
