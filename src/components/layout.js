@@ -24,7 +24,6 @@ function Header({name, isLoggedIn, role}) {
         ["Configuración", "/configuracion"],
         ["Log out", "/logout"],
     ] : [
-        ["Inicio", "#"],
         ["Log in", "/login"],
     ];
 
@@ -36,19 +35,17 @@ function Header({name, isLoggedIn, role}) {
             className="bg-[var(--navbar-bg-color)] text-[var(--navbar-text-color)]"
         >
             <NavbarContent className="md:hidden" justify="start">
-                <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
+                <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"}/>
             </NavbarContent>
 
             <NavbarContent className="md:hidden pr-3" justify="center">
                 <NavbarBrand>
-
                     <p className="font-bold text-inherit">LAB4U</p>
                 </NavbarBrand>
             </NavbarContent>
 
             <NavbarContent className="hidden md:flex gap-4" justify="center">
                 <NavbarBrand>
-
                     <p className="font-bold text-inherit">LAB4U</p>
                 </NavbarBrand>
                 {menuItems.map((item, index) => (
@@ -79,7 +76,7 @@ function Header({name, isLoggedIn, role}) {
 }
 
 function Footer() {
-    return(
+    return (
         <footer className="bg-gray-800 text-white py-9" style={{
             backgroundColor: 'var(--footer-bg-color)',
             color: 'var(--footer-text-color)',
@@ -103,7 +100,7 @@ function Footer() {
 function MainLayout({children, name, isLoggedIn, role}) {
     return (
         <>
-            <Header name={name} isLoggedIn={isLoggedIn} role={role} />
+            <Header name={name} isLoggedIn={isLoggedIn} role={role}/>
             <main className="p-9">
                 {children}
             </main>

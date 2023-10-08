@@ -4,7 +4,7 @@ import {withSessionPage} from "@/lib/session";
 import Link from "next/link";
 
 export default function Home(props) {
-    console.log(props)
+
     const [userSession, setUserSession] = useState({
         isLoggedIn: props.isLoggedIn,
         nombre: props.user,
@@ -18,7 +18,7 @@ export default function Home(props) {
                     ¡Bienvenido, {userSession.nombre}!
                 </p>
                 <p className="text-gray-700">
-                    Tus roles: {userSession.roles.join(', ')}
+                    Tus roles: {userSession.roles?.join(', ')}
                 </p>
                 <p className="text-gray-700">
                     ¿Estás autenticado? {userSession.isLoggedIn ? 'Sí' : 'No'}
