@@ -14,3 +14,101 @@ Content-Type: application/json
 }
 
 ###
+
+POST http://localhost:3000/api/insert/material
+Content-Type: application/json
+
+{
+  "nombre": "Pruebas",
+  "marca": "Pruebas",
+  "tipo": "material",
+  "descripcion": "Pruebas"
+
+}
+
+###
+
+POST http://localhost:3000/api/insert/reactivo
+Content-Type: application/json
+
+{
+  "nombre": "Pruebas",
+  "numcas": "Pruebas",
+  "formula": "Pruebas",
+  "marca": "Pruebas",
+  "unidad": "ml",
+  "cantidad": "100",
+  "contenedor": "Pruebas"
+
+}
+
+###
+
+GET http://localhost:3000/api/select/materiales
+
+###
+
+GET http://localhost:3000/api/select/reactivos
+
+###
+
+GET http://localhost:3000/api/select/marcas
+
+###
+
+GET http://localhost:3000/api/select/presentaciones
+
+###
+
+GET http://localhost:3000/api/select/contenedores
+
+###
+
+PUT http://localhost:3000/api/changes/contenedor
+Content-Type: application/json
+
+{
+  "id": "11",
+  "descripcion": "Pruebas3"
+}
+
+###
+
+PUT http://localhost:3000/api/changes/marca
+Content-Type: application/json
+
+{
+  "id": "10",
+  "nombre": "Pruebas3"
+}
+
+###
+
+PUT http://localhost:3000/api/changes/presentacion
+Content-Type: application/json
+
+{
+  "id": "1",
+  "cantidad": "100",
+    "unidad": "g"
+}
+
+###
+
+PUT http://localhost:3000/api/changes/reactivo
+Content-Type: application/json
+
+{
+  "id": "156",
+  "nombre": "Pruebas1",
+  "numcas": "Pruebas1",
+  "formula": "Pruebas1",
+  "marca": "Pruebas",
+  "unidad": "ml",
+  "cantidad": "100",
+  "contenedor": "Pruebas"
+
+}
+
+
+

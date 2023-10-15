@@ -16,6 +16,25 @@ async function getAllMateriales() {
     return materiales;
 }
 
+async function getAllMarcas() {
+    const query = "Select * from marca";
+    const [marcas] = await pool.query(query);
+    return marcas;
+}
+
+async function getAllContenedores() {
+    const query = "Select * from contenedor";
+    const [contenedores] = await pool.query(query);
+    return contenedores;
+}
+
+async function getAllPresentaciones() {
+    const query = "Select * from presentacion";
+    const [presentaciones] = await pool.query(query);
+    return presentaciones;
+}
+
+
 const getAllData = async (query1, query2) => {
     const [kits] = await pool.query(query1)
     const [materiales] = await pool.query(query2);
@@ -57,4 +76,6 @@ async function getUser(username) {
 }
 
 
-export {getAllReactivos, getAllMateriales, getAllKits, getUser};
+
+
+export {getAllReactivos, getAllMateriales, getAllKits, getUser, getAllMarcas, getAllContenedores, getAllPresentaciones};
