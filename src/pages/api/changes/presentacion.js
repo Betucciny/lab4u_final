@@ -1,8 +1,9 @@
 import {presentacionCompleto} from "@/server_sevices/inserts";
 import {presentacionParcial} from "@/server_sevices/updates";
+import {withSessionApiAdmin} from "@/lib/session";
 
 
-export default async function handler(req, res) {
+async function handler(req, res) {
     const [body, method] = [req.body, req.method];
     if (method === "POST") {
         const {cantidad, unidad} = body;
@@ -26,5 +27,6 @@ export default async function handler(req, res) {
     }
 }
 
+export default withSessionApiAdmin(handler)
 
 

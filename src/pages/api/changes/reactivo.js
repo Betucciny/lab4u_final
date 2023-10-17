@@ -1,8 +1,9 @@
 import {reactivoCompleto} from "@/server_sevices/inserts";
 import {reactivoParcial} from "@/server_sevices/updates";
+import {withSessionApiAdmin} from "@/lib/session";
 
 
-export default async function handler(req, res) {
+async function handler(req, res, session) {
     const [body, method] = [req.body, req.method];
     if (method === "POST") {
         const {nombre, numcas, formula, marca, unidad, cantidad, contenedor} = body;
@@ -27,5 +28,5 @@ export default async function handler(req, res) {
     }
 }
 
-
+export default withSessionApiAdmin(handler)
 

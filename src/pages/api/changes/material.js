@@ -1,8 +1,9 @@
 import {materialCompleto} from "@/server_sevices/inserts";
 import {materialParcial} from "@/server_sevices/updates";
+import {withSessionApiAdmin} from "@/lib/session";
 
 
-export default async function handler(req, res) {
+async function handler(req, res) {
     const [body, method] = [req.body, req.method];
     if (method === "POST") {
         const {nombre, marca, tipo, descripcion} = body;
@@ -26,5 +27,5 @@ export default async function handler(req, res) {
     }
 }
 
-
+export default withSessionApiAdmin(handler)
 

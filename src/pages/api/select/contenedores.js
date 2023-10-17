@@ -1,7 +1,8 @@
 import {getAllContenedores} from "@/server_sevices/selects";
+import {withSessionApiAdmin} from "@/lib/session";
 
 
-export default async function handler(req, res) {
+async function handler(req, res) {
     try{
         const results = await getAllContenedores();
         res.status(200).json({status: "success", data: results});
@@ -11,4 +12,4 @@ export default async function handler(req, res) {
     }
 }
 
-
+export default withSessionApiAdmin(handler)

@@ -1,8 +1,9 @@
 import {contenedorCompleto} from "@/server_sevices/inserts";
 import {contenedorParcial} from "@/server_sevices/updates";
+import {withSessionApiAdmin} from "@/lib/session";
 
 
-export default async function handler(req, res) {
+async function handler(req, res) {
     const [body, method] = [req.body, req.method];
     if (method === "POST") {
         const {descripcion} = body;
@@ -25,6 +26,8 @@ export default async function handler(req, res) {
         res.status(500).json({status: "error", data: "metodo no soportado"});
     }
 }
+
+export default withSessionApiAdmin(handler)
 
 
 
