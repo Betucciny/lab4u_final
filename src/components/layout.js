@@ -32,7 +32,7 @@ function Header({name, isLoggedIn, role}) {
             isBordered
             isMenuOpen={isMenuOpen}
             onMenuOpenChange={setIsMenuOpen}
-            className="bg-[var(--navbar-bg-color)] text-[var(--navbar-text-color)]"
+            className="bg-[var(--navbar-bg-color)] text-[var(--navbar-text-color)] h-[5vh]"
         >
             <NavbarContent className="md:hidden" justify="start">
                 <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"}/>
@@ -77,11 +77,11 @@ function Header({name, isLoggedIn, role}) {
 
 function Footer() {
     return (
-        <footer className="bg-gray-800 text-white py-9" style={{
+        <footer className="bg-gray-800 text-white py-8 max-h-[15vh]" style={{
             backgroundColor: 'var(--footer-bg-color)',
             color: 'var(--footer-text-color)',
         }}>
-            <div className="container mx-auto md:flex md:justify-between md:items-center p-9">
+            <div className="container mx-auto md:flex md:justify-between md:items-center p-7">
                 <div className="md:text-center mb-4 md:mb-0">
                     <a href="#" className="text-blue-300 hover:text-blue-400 text-sm font-semibold">Acerca de</a>
                 </div>
@@ -101,7 +101,7 @@ function MainLayout({children, name, isLoggedIn, role}) {
     return (
         <>
             <Header name={name} isLoggedIn={isLoggedIn} role={role}/>
-            <main className="p-9">
+            <main className="p-9 min-h-[80vh]">
                 {children}
             </main>
             <Footer/>
