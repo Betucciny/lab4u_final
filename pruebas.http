@@ -57,6 +57,10 @@ GET http://localhost:3000/api/select/contenedores
 
 ###
 
+GET http://localhost:3000/api/select/kits
+
+###
+
 PUT http://localhost:3000/api/changes/contenedor
 Content-Type: application/json
 
@@ -102,6 +106,9 @@ Content-Type: application/json
   "contenedor": "Pruebas"
 
 }
+
+
+###
 
 
 

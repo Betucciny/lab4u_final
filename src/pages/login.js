@@ -79,4 +79,12 @@ export default function LoginPage(props) {
     )
 }
 
-export const getServerSideProps = withSessionPage()
+export const getServerSideProps = withSessionPage(async function ({req, res}) {
+    return {
+        props: {
+            isLoggedIn: req.session.get("isLoggedIn") === true,
+            user: req.session.get("user") || "",
+            role: req.session.get("role") || ""
+        }
+    };
+})

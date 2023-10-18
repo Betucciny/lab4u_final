@@ -2,12 +2,40 @@ import {pool} from "@/server_sevices/databasepool";
 import {escape} from "mysql2";
 
 async function getAllReactivos() {
-    const query = "Select r.id, r.nombre, m.nombre as marca, c.descripcion as contenedor, r.numcas, " +
-        "p.cantidad, p.unidad from reactivo r left join marca m ON r.idmarca = m.id left join contenedor c ON " +
-        "r.idcontenedor = c.id left join presentacion p ON r.idpresentacion = p.id";
-    const [reactivos] = await pool.query(query)
-    return reactivos;
+    const query = `
+    SELECT r.id, r.nombre, m.nombre as marca, c.descripcion as contenedor, r.numcas,
+    p.cantidad, p.unidad
+    FROM reactivo r
+    LEFT JOIN marca m ON r.idmarca = m.id
+    LEFT JOIN contenedor c ON r.idcontenedor = c.id
+    LEFT JOIN presentacion p ON r.idpresentacion = p.id
+  `;
+
+    const [reactivos] = await pool.query(query);
+
+    const existenciasPromises = reactivos.map((reactivo) => {
+        return getExistencias(reactivo.id).then((existencias) => {
+            reactivo.existencias = existencias;
+            return reactivo;
+        });
+    });
+
+    return Promise.all(existenciasPromises);
 }
+
+
+async function getExistencias(id) {
+    const query = "Select id, caducidad, estatus, numserie, contenido, observaciones, ubicacion, entrada from" +
+        " existencia_reactivo where idreactivo = " + escape(id);
+    const [existencias] = await pool.query(query);
+    return existencias.map((existencia) => {
+        existencia.caducidad = existencia.caducidad.toISOString().split('T')[0];
+        existencia.entrada = existencia.entrada.toISOString().split('T')[0];
+        return existencia;
+    })
+    // return existencias;
+}
+
 async function getAllMateriales() {
     const query = "Select mat.id, mat.nombre, m.nombre as marca, mat.tipo, mat.descripcion " +
         "from material mat left join marca m ON  mat.idmarca = m.id left join kit k ON mat.id = " +
@@ -46,7 +74,7 @@ async function getAllKits() {
     const query1 = "Select mat.id, mat.nombre, m.nombre as marca, mat.tipo, mat.descripcion " +
         "from material mat left join marca m ON mat.idmarca = m.id left join kit k ON mat.id = " +
         "k.idp where k.idp is not null";
-    const query2 = "Select k.idp as kit, mat.id, mat.nombre, m.nombre as marca, mat.tipo, " +
+    const query2 = "Select k.idp as kit, k.cantidad as cantidad, mat.id, mat.nombre, m.nombre as marca, mat.tipo, " +
         "mat.descripcion from material mat left join marca m ON mat.idmarca = m.id left join " +
         "kit k ON mat.id = k.idh where k.idp is not null";
 

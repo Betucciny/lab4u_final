@@ -38,7 +38,7 @@ export function withSessionApiAdmin(handler) {
     });
 }
 
-export function withSessionPage() {
+export function withSessionPage(handler) {
     return withSession(async function ({req, res}) {
         if (req.session.get("isLoggedIn") === false || req.session.get("isLoggedIn") === undefined) {
             if (req.url !== "/login") {
@@ -46,12 +46,6 @@ export function withSessionPage() {
                 res.end();
             }
         }
-        return {
-            props: {
-                isLoggedIn: req.session.get("isLoggedIn") || false,
-                user: req.session.get("user") || {},
-                role: req.session.get("role") || [],
-            }
-        }
+        return handler({req, res});
     });
 }
