@@ -52,6 +52,7 @@ export default function LoginPage(props) {
                                 <Input
                                     type="text"
                                     placeholder="Username"
+                                    value={user_data.username}
                                     onValueChange={usernameHandler}
                                     className="block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500 focus:outline-none"
                                     required
@@ -59,6 +60,7 @@ export default function LoginPage(props) {
                                 <Input
                                     type="password"
                                     placeholder="Password"
+                                    value={user_data.password}
                                     onValueChange={passwordHandler}
                                     className="block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500 focus:outline-none"
                                     required

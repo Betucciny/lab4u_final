@@ -119,6 +119,31 @@ async function getUser(username) {
 }
 
 
+async function getVales(idUsuario){
+    const query = "Select v.id, v.fecha, v.estatus, m.nombre as materia, g.nombre as grupo, g.semestre as " +
+        "semestre from vale_profesor v left join grupo g ON v.idgrupo = g.id left join materia m ON v.idmateria = m.id " +
+        "where v.idusuario = " + escape(idUsuario);
+    try {
+        const [vales] = await pool.query(query);
+        for (let i = 0; i < vales.length; i++) {
+            const queryReactivos = "Select r.nombre, r.numcas, r.formula, c.descripcion as contenedor, " +
+                "p.cantidad, p.unidad, vr.numserie from vale_reactivo vr left join reactivo r ON vr.idreactivo = r.id " +
+                "left join contenedor c ON r.idcontenedor = c.id left join presentacion p " +
+                "ON r.idpresentacion = p.id where vr.idvale = " + escape(vales[i].id);
+            const [reactivos] = await pool.query(queryReactivos);
+            vales[i].fecha = vales[i].fecha.toISOString().split('T')[0];
+            vales[i].reactivos = reactivos;
+            const queryMateriales = "Select m.nombre, m.tipo, m.descripcion, ma.nombre, vm.codigo, " +
+                "vm.cantidad from vale_material vm left join material m ON vm.idmaterial = m.id left join marca ma " +
+                "ON m.idmarca = ma.id where vm.idvale = " + escape(vales[i].id);
+            const [materiales] = await pool.query(queryMateriales);
+            vales[i].materiales = materiales;
+        }
+        return vales;
+    }catch (e) {
+        throw new Error("No vales found");
+    }
+}
 
 
-export {getAllReactivos, getAllMateriales, getAllKits, getUser, getAllMarcas, getAllContenedores, getAllPresentaciones};
+export {getAllReactivos, getAllMateriales, getAllKits, getUser, getAllMarcas, getAllContenedores, getAllPresentaciones, getVales};

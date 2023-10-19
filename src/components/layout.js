@@ -20,7 +20,7 @@ function Header({name, isLoggedIn, role}) {
         ["Inicio", "/"],
         ["Inventario", "/inventario"],
         ["Crear Vale", "/crear-vale-profesor"],
-        ["Historial de Vales", "/historial-vales"],
+        ["Historial de Vales", "/historial-vales-profesor"],
         ["Configuración", "/configuracion"],
         ["Log out", "/logout"],
     ] : [
