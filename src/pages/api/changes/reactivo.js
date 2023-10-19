@@ -19,7 +19,6 @@ async function handler(req, res, session) {
             const result = await reactivoParcial(id, nombre, numcas, formula, marca, unidad, cantidad, contenedor);
             res.status(200).json({status: "success", data: result});
         } catch (e) {
-            console.log(e);
             res.status(500).json({message: e.message});
         }
 

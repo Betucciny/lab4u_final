@@ -14,7 +14,7 @@ async function getAllReactivos() {
     const [reactivos] = await pool.query(query);
 
     const existenciasPromises = reactivos.map((reactivo) => {
-        return getExistencias(reactivo.id).then((existencias) => {
+        return getExistenciasReactivos(reactivo.id).then((existencias) => {
             reactivo.existencias = existencias;
             return reactivo;
         });
@@ -24,7 +24,7 @@ async function getAllReactivos() {
 }
 
 
-async function getExistencias(id) {
+async function getExistenciasReactivos(id) {
     const query = "Select id, caducidad, estatus, numserie, contenido, observaciones, ubicacion, entrada from" +
         " existencia_reactivo where idreactivo = " + escape(id);
     const [existencias] = await pool.query(query);
@@ -38,10 +38,26 @@ async function getExistencias(id) {
 
 async function getAllMateriales() {
     const query = "Select mat.id, mat.nombre, m.nombre as marca, mat.tipo, mat.descripcion " +
-        "from material mat left join marca m ON  mat.idmarca = m.id left join kit k ON mat.id = " +
-        "k.idp where k.idp is null";
+        "from material mat left join marca m ON  mat.idmarca = m.id";
     const [materiales] = await pool.query(query);
-    return materiales;
+
+    const existenciasPromises = materiales.map((material) => {
+        return getExistenciasMaterial(material.id).then((existencias) => {
+            material.existencias = existencias;
+            return material;
+        });
+    });
+    return Promise.all(existenciasPromises);
+}
+
+async function getExistenciasMaterial(id) {
+    const query = "Select id, cantidad, numeroserie, observaciones, codigo, ubicacion, entrada from" +
+        " existencia_material where idmaterial = " + escape(id);
+    const [existencias] = await pool.query(query);
+    return existencias.map((existencia) => {
+        existencia.entrada = existencia.entrada.toISOString().split('T')[0];
+        return existencia;
+    })
 }
 
 async function getAllMarcas() {
@@ -88,7 +104,6 @@ async function getAllKits() {
 async function getRoles(id) {
     const query = "Select r.tipo from rol r left join usuario_rol ur ON r.id = ur.idrol where ur.idusuario = " + escape(id);
     const [roles] = await pool.query(query);
-    console.log(roles)
     return roles.map((rol) => rol.tipo);
 }
 

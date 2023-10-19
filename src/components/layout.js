@@ -19,7 +19,7 @@ function Header({name, isLoggedIn, role}) {
     const menuItems = isLoggedIn ? [
         ["Inicio", "/"],
         ["Inventario", "/inventario"],
-        ["Crear Vale", "/crear-vale"],
+        ["Crear Vale", "/crear-vale-profesor"],
         ["Historial de Vales", "/historial-vales"],
         ["Configuración", "/configuracion"],
         ["Log out", "/logout"],

@@ -29,7 +29,7 @@ export function withSessionApiAdmin(handler) {
             res.end();
         } else {
             if (req.session.get("role").includes("admin")) {
-                return handler({req, res});
+                return handler(req, res);
             } else {
                 res.writeHead(403, {Location: "/login"});
                 res.end();
